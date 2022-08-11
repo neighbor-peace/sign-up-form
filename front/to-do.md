@@ -1,7 +1,9 @@
 x position and spacing
+x font
+x colors 
+x header and footer
 
-colors and font
 validation indicators
 button handler
-background
-header and footer
+
+video background

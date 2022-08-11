@@ -1,6 +1,6 @@
 :root {
   --background: #011526;
-  --opaque-background: #011526e0;
+  --opaque-background: #011526d7;
   --main-text: #D90754;
   --minor-text: #0578A6;
   --highlighted-text: #0BB3D9;
@@ -11,7 +11,7 @@
 
 main {
   color: var(--minor-text);
-  background-image:url("../public/images/rain.gif");
+  background-image:url("../public/media/rain.gif");
   background-origin: border-box;
   background-repeat: no-repeat;
   background-size: max(130vw, 200vh);
@@ -26,22 +26,34 @@ main {
   height: 100vh;
 }
 
+@media (max-width: 750px) {
+  
+}
+
 .header,
 .footer {
-  background-color: black;
-  height: 5vh;
+  background-color: var(--opaque-background);
   width: 100vw;
   display: flex;
-  padding: 10px;
+  padding: 10px 20px;
   align-items: center;
 }
 
 .header {
   justify-content: space-between;
+  height: 70px;
+}
+
+.icon {
+  fill: white;
+  height: 50px;
+  width: auto;
+  margin-top: 5px;
 }
 
 .footer {
   justify-content: center;
+  height: 50px;
 }
 
 .footer p,
@@ -55,10 +67,7 @@ main {
 
 a {
   color: var(--highlighted-text);
-}
-
-a:visited {
-  color: var(--minor-text);
+  text-decoration: none;
 }
 
 a:hover {
@@ -143,3 +152,4 @@ button:hover {
 meter {
   width: 100%;
 }
+
