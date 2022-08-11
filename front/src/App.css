@@ -1,7 +1,21 @@
+:root {
+  --background: #011526;
+  --opaque-background: #011526e0;
+  --main-text: #D90754;
+  --minor-text: #0578A6;
+  --highlighted-text: #0BB3D9;
+  --input-text: #0BB3D9;
+  --valid: green;
+  --invalid: red;
+}
 
 main {
-  color: #5D6063;
-  background-color: #EAEDF0;
+  color: var(--minor-text);
+  background-image:url("../public/images/rain.gif");
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  background-size: max(130vw, 200vh);
+  background-position: -30vw min(-10px, -7vh);
   font-family: "Helvetica", "Arial", sans-serif;
   font-size: 1rem;
   line-height: 1.5rem;
@@ -10,6 +24,46 @@ main {
   flex-direction: column;
   align-items: center;
   height: 100vh;
+}
+
+.header,
+.footer {
+  background-color: black;
+  height: 5vh;
+  width: 100vw;
+  display: flex;
+  padding: 10px;
+  align-items: center;
+}
+
+.header {
+  justify-content: space-between;
+}
+
+.footer {
+  justify-content: center;
+}
+
+.footer p,
+.footer a {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.footer p {
+  font-size: .8rem;
+}
+
+a {
+  color: var(--highlighted-text);
+}
+
+a:visited {
+  color: var(--minor-text);
+}
+
+a:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .content-container {
@@ -21,9 +75,8 @@ main {
 }
 
 .form-container {
-  background-color: lightskyblue;
-  border: 1px solid black;
-  border-radius: 6px;
+  background-color: var(--background);
+  border: 1px solid var(--minor-text);
 }
 
 .form-container,
@@ -31,23 +84,60 @@ main {
   margin: 0px 24px;
   padding: 24px;
   width: min(655px, 100vw - 48px);
+  border-radius: 6px;
+}
+
+.hint-container {
+  background-color: var(--opaque-background);
+}
+
+.form-container div,
+.form-container label {
+  font-family: 'Ubuntu Mono', monospace;
+  color: var(--main-text);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+input {
+  color: var(--input-text);
+  background-color: var(--background);
+}
+
+.form-container input {
+  border-style: none;
+  font-size: 1rem;
 }
 
 .input-container {
   margin-top: 24px;
 }
 
-input:not([type="radio"]) {
+.hint {
+  margin-bottom: 10px;
+}
+
+input:not([type="checkbox"]) {
   width: 80%;
 }
 
 button {
   padding: 5px 16px;
+  background: none;
+  color: var(--minor-text);
+  box-shadow: none;
+  border-radius: 6px;
+  border-style: solid;
+  border-color: var(--minor-text);
 }
 
 button[type="submit"] {
   margin-top: 24px;
   width: 100%;
+}
+
+button:hover {
+  cursor: pointer;  
 }
 
 meter {

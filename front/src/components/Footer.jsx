@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
 
   return(
-    <div>By creating an account, you agree to the <a>Terms of Service</a>.</div>
+    <div class="footer"><p>By creating an account, you agree to the <a>Terms of Service</a>.</p></div>
   )
 }
 
