@@ -10,7 +10,7 @@ const Header = () => {
           </svg>
         </a>
       <p>Already have an account? <a
-        onClick={e => window.alert("Routed to sign in page")}>Sign in</a>
+        onClick={e => window.alert("There is no sign-in page. This is just a demo for a sign-up page :)")}>Sign in</a>
       </p>
     </div>
   )
