@@ -164,17 +164,14 @@ const Form = () => {
         </form>
       </div>
       <div className="hint-container">
-        {/* Shown when active, email isn't valid, and user has input sth*/}
         {focus === "email" && !formData.email.valid && formData.email.value.length > 0 &&
         <div id="email-err" className="hint">Email is invalid or already taken</div>
         }
-        {/* Shown when input is active */}
         {focus === "password" && !formData.password.valid && formData.password.value.length > 0 &&
         <div className="hint">
           <div id="pw-hint">Make sure your password is at least 8 characters long and contains uppercase letters, lowercase letters, and numbers or symbols</div>
         </div>
         }
-        {/* Shown when input is active */}
         {focus === "username" && !formData.username.valid && formData.username.value.length > 0 &&
         <div id="username-status" className="hint">Username {formData.username.value} is not available</div>
         }

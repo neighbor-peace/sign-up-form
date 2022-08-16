@@ -31,35 +31,37 @@ class Input extends Component {
         <label htmlFor={name}>
           <div>{instructions}</div>
         </label>
-        {focus === name && <span className="indicator">→</span>}
-        {focus !== name && !isValid && <span className="invalid indicator">×</span>}
-        {focus !== name && isValid && <span className="valid indicator">✓</span>}
-        <input
-          type={type}
-          id={name}
-          name={name}
-          placeholder={placeholder}
-          pattern={pattern}
-          minLength={minLength}
-          onChange={handleChange}
-          onFocus={handleFocus}
-          onBlur={handleFocus}
-          value={value}
-          ref={this.input}
-          onKeyDown={event => {
-            if (event.key === "Enter") {
-              handleClick(event);
-            }
-          }}
-          required
-          />
-          <button 
-            type="button"
+        <span>
+          {focus === name && <span className="indicator">→</span>}
+          {focus !== name && !isValid && <span className="invalid indicator">×</span>}
+          {focus !== name && isValid && <span className="valid indicator">✓</span>}
+          <input
+            type={type}
+            id={name}
             name={name}
-            onClick={handleClick}
-            className={isValid ? "valid" : "invalid"}
-            >Continue
-          </button>
+            placeholder={placeholder}
+            pattern={pattern}
+            minLength={minLength}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            // onBlur={handleFocus}
+            value={value}
+            ref={this.input}
+            onKeyDown={event => {
+              if (event.key === "Enter") {
+                handleClick(event);
+              }
+            }}
+            required
+            />
+        </span>
+        {focus === name && <button 
+          type="button"
+          name={name}
+          onClick={handleClick}
+          className={isValid ? "valid" : "invalid"}
+          >Continue
+        </button>}
       </div>
     )
   }

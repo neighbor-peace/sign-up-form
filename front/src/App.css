@@ -9,10 +9,29 @@
   --valid: green;
   --invalid: red;
 }
+/* Animated Background by Manuel Pinto */
+body {
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
 
 main {
   color: var(--dull-text);
-  background-image: url(../public/media/rain.png);
   font-family: "Helvetica", "Arial", sans-serif;
   font-size: 1rem;
   line-height: 1.5rem;
@@ -24,16 +43,22 @@ main {
 }
 
 @media (max-width: 750px) {
-  main {
-    background-color: black;
-    background-image:none;
-  }
   button {
     width: 100%;
     margin-top: 24px;
   }
+  .input-container > span {
+    display: flex;
+    align-items: center;
+  }
+
   input:not([type="checkbox"]) {
-    width: 100%;
+    flex: 1;
+  }
+
+  .footer span {
+    display: block;
+    margin: -5px;
   }
 }
 
@@ -61,7 +86,8 @@ main {
 
 .footer {
   justify-content: center;
-  height: 50px;
+  height: 70px;
+  text-align: center;
 }
 
 .footer p,
@@ -110,6 +136,10 @@ a:hover {
 
 .hint-container {
   background-color: var(--opaque-background);
+}
+
+.hint-container > * {
+  color: var(--minor-text);
 }
 
 .hint {
