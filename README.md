@@ -26,3 +26,4 @@ Check out the live demo here: https://neighbor-peace.github.io/sign-up-form/
 ## Misc
 - How to host a React app on Github
 - How to implement svg logos
+- Stop browser from displaying cached favicon by appending '?v=2' to new favicon href
