@@ -8,19 +8,22 @@ const Form = () => {
       value: "",
       valid: false,
       shouldRender: true,
-      reveal: "password"
+      reveal: "password",
+      passFocusTo: 2
     },
     password: {
       value: "",
       valid: false,
       shouldRender: false,
-      reveal: "username"
+      reveal: "username",
+      passFocusTo: 4
     },
     username: {
       value: "",
       valid: false,
       shouldRender: false,
-      reveal: "newsletter"
+      reveal: "newsletter",
+      passFocusTo: 6
     },
     newsletter: {
       value: false,
@@ -58,22 +61,26 @@ const Form = () => {
     //updates shouldRender
     const {name, value} = event.target;
     const reveal = formData[name].reveal;
+    const i = formData[name].passFocusTo;
 
     //executes iff input is valid
     if (!formData[name].valid) {
       event.target.previousSibling.focus();
       return;
     }
-    
-    setFormData(prevFormData => {
-      return {
-        ...prevFormData,
-        [reveal]: {
-          ...prevFormData[reveal],
-          shouldRender: true,
-        },
-      }
-    })
+    if (!formData[reveal].shouldRender) {
+      setFormData(prevFormData => {
+        return {
+          ...prevFormData,
+          [reveal]: {
+            ...prevFormData[reveal],
+            shouldRender: true,
+          },
+        }
+      })
+    } else {
+      event.target.form[i].focus();
+    }
   }
 
   function submitForm() {

@@ -26,6 +26,13 @@ class Input extends Component {
       focus
     } = this.props;
 
+    let buttonClass;
+    if (focus !== name) {
+      buttonClass = "hidden"
+    } else {
+      buttonClass = isValid ? "valid" : "invalid";
+    }
+
     return (
       <div className="input-container">
         <label htmlFor={name}>
@@ -55,13 +62,14 @@ class Input extends Component {
             required
             />
         </span>
-        {focus === name && <button 
+        <button 
           type="button"
           name={name}
           onClick={handleClick}
-          className={isValid ? "valid" : "invalid"}
+          // className={isValid ? "valid" : "invalid"}
+          className={buttonClass}
           >Continue
-        </button>}
+        </button>
       </div>
     )
   }

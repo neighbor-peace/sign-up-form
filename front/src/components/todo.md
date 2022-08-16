@@ -1,3 +1,3 @@
-make newsletter a class as well so it can take focus
+prevent enter key from refreshing on first line
 
 publish on github

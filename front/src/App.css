@@ -45,11 +45,20 @@ main {
 @media (max-width: 750px) {
   button {
     width: 100%;
-    margin-top: 24px;
   }
+
+  button#submit {
+    margin-top: 0px;
+  }
+
+  .input-container {
+    margin-top: 6px !important;
+  }
+
   .input-container > span {
     display: flex;
     align-items: center;
+    min-height: 54px;
   }
 
   input:not([type="checkbox"]) {
@@ -66,6 +75,7 @@ main {
 .footer {
   background-color: var(--opaque-background);
   width: 100vw;
+  min-width: 363px;
   display: flex;
   padding: 10px 20px;
   align-items: center;
@@ -131,6 +141,7 @@ a:hover {
 .hint-container {
   margin: 0px 24px;
   width: min(655px, 100vw - 48px);
+  min-width: 315px;
   border-radius: 6px;
 }
 
@@ -218,4 +229,7 @@ button.valid {
   border-color: var(--va);
 }
 
+button.hidden {
+  visibility: hidden;
+}
 
