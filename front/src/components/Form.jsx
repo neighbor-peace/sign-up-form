@@ -1,35 +1,35 @@
 import React, {useState} from "react";
+import Input from "./Input";
 
 const Form = () => {
   const[formData, setFormData] = useState({
     email: {
       value: "",
       valid: false,
-      hidden: false,
+      shouldRender: true,
       reveal: "password"
     },
     password: {
       value: "",
       valid: false,
-      hidden: true,
+      shouldRender: false,
       reveal: "username"
     },
     username: {
       value: "",
       valid: false,
-      hidden: true,
+      shouldRender: false,
       reveal: "newsletter"
     },
     newsletter: {
       value: false,
       valid: false,
-      hidden: true,
+      shouldRender: false,
       reveal: null
     },
-    activeField: 'email'
   })
 
-  function handleChange(event) {
+  function updateForm(event) {
     //updates value and valid
     const {type, name, value, checked} = event.target;
     setFormData(prevFormData => {
@@ -45,26 +45,25 @@ const Form = () => {
   }
 
 
-  function revealNextElement(event) {
-    //executes iff input is valid
-    if (!formData[name].valid) return;
+  function renderNextElement(event) {
     //changes focus
-    //updates hidden
+    //updates shouldRender
     const {name, value} = event.target;
     const reveal = formData[name].reveal;
 
+    //executes iff input is valid
+    if (!formData[name].valid) {
+      console.log(`${name} is invalid`);
+      return;
+    }
     
-
-
-
     setFormData(prevFormData => {
       return {
         ...prevFormData,
         [reveal]: {
           ...prevFormData[reveal],
-          hidden: false,
+          shouldRender: true,
         },
-        activeField: reveal
       }
     })
   }
@@ -85,75 +84,53 @@ const Form = () => {
       <div className="form-container">
         <form  noValidate >
           <h3>Welcome to this fictional service!<br/>Your journey starts here</h3>
-          <div className="input-container">
-            <label htmlFor="mail">
-              <div>Enter your email</div>
-            </label>
-            <span id="mail-validation-indicator" className="indicator">→</span>
-            <input
-              type="email"
-              id="mail"
-              name="email"
-              placeholder="example@email.com"
-              onChange={handleChange}
-              value={formData.email.value}
-              ref={this}
-              required
-              />
-              <button 
-                type="button"
-                name="email"
-                onClick={revealNextElement}
-                >Continue
-              </button>
-          </div>
-          <div className={`input-container ${formData.password.hidden && "hidden"}`}>
-            <label htmlFor="pwd">
-              <div>Create a password</div>
-            </label>
-            <span id="pwd-validation-indicator" className="indicator">→</span>
-            <input
-              type="password"
-              id="pwd"
-              name="password"
-              onChange={handleChange}
-              value={formData.password.value}
-              //pattern: (UpperCase, LowerCase, Number/SpecialChar and min 8 Chars)
-              pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-              required
-              />
-            <button 
-            type="button"
+          
+          <Input 
+            type="email"
+            name="email"
+            instructions="Enter your email"
+            placeholder="example@email.com"
+            pattern={false}
+            minLength="0"
+            value={formData.email.value}
+            handleChange={updateForm}
+            handleClick={renderNextElement}
+          />
+         
+          {formData.password.shouldRender && 
+          <Input 
+            type="password"
             name="password"
-            onClick={revealNextElement}
-            >Continue</button>
-          </div>
-          <div className={`input-container ${formData.username.hidden && "hidden"}`}>
-            <label htmlFor="username">
-              <div>Enter a username</div>
-            </label>
-            <span id="username-validation-indicator" className="indicator">→</span>
-            <input 
-              type="text" 
-              id="username" 
-              name="username" 
-              onChange={handleChange}
-              value={formData.username.value}
-              minLength="5"
-              required
-            />
-            <button 
-            type="button"
+            instructions="Create a password"
+            placeholder=""
+            //pattern: (UpperCase, LowerCase, Number/SpecialChar and min 8 Chars)
+            pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+            minLength="0"
+            value={formData.password.value}
+            handleChange={updateForm}
+            handleClick={renderNextElement}
+          />}
+          
+          {formData.username.shouldRender && 
+          <Input 
+            type="text"
             name="username"
-            onClick={revealNextElement}
-            >Continue</button>
-          </div>
-          <div className={`input-container ${formData.newsletter.hidden && "hidden"}`}>
+            instructions="Enter a username"
+            placeholder=""
+            pattern={false}
+            minLength="5"
+            value={formData.username.value}
+            handleChange={updateForm}
+            handleClick={renderNextElement}
+          />}
+
+          {formData.newsletter.shouldRender && 
+          <div className="input-container">
             <input 
               type="checkbox" 
               id="newsletter" 
               name="newsletter"
-              onChange={handleChange}
+              onChange={updateForm}
               checked={formData.newsletter.value} 
             />
             <label htmlFor="newsletter">Send me the newsletter</label>
@@ -164,7 +141,7 @@ const Form = () => {
               onClick={submitForm}
             >Create account
             </button>
-          </div>
+          </div>}
         </form>
       </div>
       <div className="hint-container">
