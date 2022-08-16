@@ -60,8 +60,6 @@ const Form = () => {
 
     //executes iff input is valid
     if (!formData[name].valid) {
-      console.log(`${name} is invalid`);
-      console.log(event.target);
       event.target.previousSibling.focus();
       return;
     }
@@ -78,19 +76,21 @@ const Form = () => {
   }
 
   function submitForm() {
-    window.alert(`
-      Form Data "Submitted"
+    if (formData.email.valid && formData.password.valid && formData.username.valid) {
+      window.alert(`
+        Form Data "Submitted"
 
-      email: ${formData.email.value}
-      password: ${formData.password.value}
-      username: ${formData.username.value}
-      newsletter: ${formData.newsletter.value}`);
+        email: ${formData.email.value}
+        password: ${formData.password.value}
+        username: ${formData.username.value}
+        newsletter: ${formData.newsletter.value}`);
+    }
   }
 
   return (
     <div className="content-container">
       <div className="form-container">
-        <form  noValidate >
+        <form  noValidate onSubmit={submitForm}>
           <h3>Welcome to this fictional service!<br/>Your journey starts here</h3>
           
           <Input 
@@ -154,6 +154,10 @@ const Form = () => {
               id="submit"
               type="button"
               onClick={submitForm}
+              className={
+                formData.email.valid 
+                && formData.password.valid 
+                && formData.username.valid ? "valid" : "invalid"}
             >Create account
             </button>
           </div>}

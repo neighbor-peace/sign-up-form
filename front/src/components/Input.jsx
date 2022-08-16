@@ -46,13 +46,18 @@ class Input extends Component {
           onBlur={handleFocus}
           value={value}
           ref={this.input}
+          onKeyDown={event => {
+            if (event.key === "Enter") {
+              handleClick(event);
+            }
+          }}
           required
           />
           <button 
             type="button"
             name={name}
             onClick={handleClick}
-            className={isValid && "valid"}
+            className={isValid ? "valid" : "invalid"}
             >Continue
           </button>
       </div>
