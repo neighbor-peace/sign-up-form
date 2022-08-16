@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Sign-Up Form",
+  "name": "Sign-Up Form for an Imaginary Service",
   "icons": [
     {
       "src": "favicon.ico",
