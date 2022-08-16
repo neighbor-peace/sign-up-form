@@ -21,7 +21,9 @@ class Input extends Component {
       value,
       handleChange,
       handleClick,
-      handleFocus
+      handleFocus,
+      isValid,
+      focus
     } = this.props;
 
     return (
@@ -29,7 +31,9 @@ class Input extends Component {
         <label htmlFor={name}>
           <div>{instructions}</div>
         </label>
-        <span className="indicator">→</span>
+        {focus === name && <span className="indicator">→</span>}
+        {focus !== name && !isValid && <span className="invalid indicator">×</span>}
+        {focus !== name && isValid && <span className="valid indicator">✓</span>}
         <input
           type={type}
           id={name}
@@ -39,6 +43,7 @@ class Input extends Component {
           minLength={minLength}
           onChange={handleChange}
           onFocus={handleFocus}
+          onBlur={handleFocus}
           value={value}
           ref={this.input}
           required
@@ -47,6 +52,7 @@ class Input extends Component {
             type="button"
             name={name}
             onClick={handleClick}
+            className={isValid && "valid"}
             >Continue
           </button>
       </div>

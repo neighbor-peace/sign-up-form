@@ -1,16 +1,17 @@
 :root {
   --background: #011526;
-  --opaque-background: #011526d7;
+  --opaque-background: #011526e4;
   --main-text: #D90754;
   --minor-text: #0578A6;
   --highlighted-text: #0BB3D9;
-  --input-text: #0BB3D9;
+  --input-text: #009cc0;
+  --dull-text: #35717e;
   --valid: green;
   --invalid: red;
 }
 
 main {
-  color: var(--minor-text);
+  color: var(--dull-text);
   background-image: url(../public/media/rain.png);
   font-family: "Helvetica", "Arial", sans-serif;
   font-size: 1rem;
@@ -36,6 +37,7 @@ main {
   display: flex;
   padding: 10px 20px;
   align-items: center;
+  color: var(--minor-text)
 }
 
 .header {
@@ -62,6 +64,10 @@ main {
 
 .footer p {
   font-size: .8rem;
+}
+
+h3 {
+  color: var(--minor-text);
 }
 
 a {
@@ -113,6 +119,15 @@ a:hover {
 
 .indicator {
   margin-right: 5px;
+  color: var(--dull-text);
+}
+
+span.valid {
+  color: var(--valid);
+}
+
+span.invalid {
+  color: var(--invalid)
 }
 
 input {
@@ -145,11 +160,11 @@ input[type="checkbox"] {
 button {
   padding: 5px 16px;
   background: none;
-  color: var(--minor-text);
+  color: var(--dull-text);
   box-shadow: none;
   border-radius: 6px;
   border-style: solid;
-  border-color: var(--minor-text);
+  border-color: var(--dull-text);
 }
 
 #submit {
@@ -163,7 +178,7 @@ button:hover {
 
 button.valid {
   color: var(--valid);
-  border-color: var(--valid);
+  border-color: var(--va);
 }
 
 

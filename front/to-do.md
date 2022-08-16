@@ -5,11 +5,10 @@ x header and footer
 
 x implement classes so I can use a ref to focus the next input
 
-validation indicators
+x validation indicators
   crossout, arrow, check
-  email
-  pw
-  username
+
+fix enter button
 
 width change
   give inputs min width equal to media query (use variable?)

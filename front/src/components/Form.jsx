@@ -49,8 +49,7 @@ const Form = () => {
   }
 
   function updateFocus(event) {
-    console.log('focus is now on', event.target.name)
-    setFocus(event.target.name);
+    setFocus(event.type === "focus" ? event.target.name : undefined);
   }
 
   function renderNextElement(event) {
@@ -81,7 +80,7 @@ const Form = () => {
   function submitForm() {
     window.alert(`
       Form Data "Submitted"
-      
+
       email: ${formData.email.value}
       password: ${formData.password.value}
       username: ${formData.username.value}
@@ -103,6 +102,9 @@ const Form = () => {
             handleChange={updateForm}
             handleClick={renderNextElement}
             handleFocus={updateFocus}
+            handleBlur={updateFocus}
+            isValid={formData.email.valid}
+            focus={focus}
           />
          
           {formData.password.shouldRender && 
@@ -116,6 +118,9 @@ const Form = () => {
             handleChange={updateForm}
             handleClick={renderNextElement}
             handleFocus={updateFocus}
+            handleBlur={updateFocus}
+            isValid={formData.password.valid}
+            focus={focus}
           />}
           
           {formData.username.shouldRender && 
@@ -128,6 +133,9 @@ const Form = () => {
             handleChange={updateForm}
             handleClick={renderNextElement}
             handleFocus={updateFocus}
+            handleBlur={updateFocus}
+            isValid={formData.username.valid}
+            focus={focus}
           />}
 
           {formData.newsletter.shouldRender && 
@@ -164,7 +172,7 @@ const Form = () => {
         }
         {/* Shown when input is active */}
         {focus === "username" && !formData.username.valid && formData.username.value.length > 0 &&
-        <div id="username-status" className="hint">{formData.username.value} is unavailable</div>
+        <div id="username-status" className="hint">Username {formData.username.value} is not available</div>
         }
       </div>
     </div>
