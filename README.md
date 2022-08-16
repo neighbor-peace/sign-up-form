@@ -1,6 +1,6 @@
 # Mock Sign Up Form
-A sign-up form for an imaginary service
-Check it out here: https://neighbor-peace.github.io/sign-up-form/
+A sign-up form for an imaginary service.  
+Check out the live demo here: https://neighbor-peace.github.io/sign-up-form/
 
 # Goals
 - Create a beautiful and dynamic sign up form
