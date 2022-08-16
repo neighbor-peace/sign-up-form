@@ -65,7 +65,7 @@ const Form = () => {
 
     //executes iff input is valid
     if (!formData[name].valid) {
-      event.target.previousSibling.focus();
+      event.target.form[formIndex - 2].focus();
     }
     else if (!formData[reveal].shouldRender) {
       setFormData(prevFormData => {
