@@ -84,19 +84,23 @@ a:hover {
 
 .form-container {
   background-color: var(--background);
+  padding: 24px;
   border: 1px solid var(--minor-text);
 }
 
 .form-container,
 .hint-container {
   margin: 0px 24px;
-  padding: 24px;
   width: min(655px, 100vw - 48px);
   border-radius: 6px;
 }
 
 .hint-container {
   background-color: var(--opaque-background);
+}
+
+.hint {
+  margin: 24px;
 }
 
 .form-container div,
@@ -130,10 +134,6 @@ input:focus-visible {
   margin-top: 24px;
 }
 
-.hint {
-  margin-bottom: 10px;
-}
-
 input:not([type="checkbox"]) {
   width: 80%;
 }
@@ -161,10 +161,9 @@ button:hover {
   cursor: pointer;  
 }
 
-meter {
-  width: 100%;
+button.valid {
+  color: var(--valid);
+  border-color: var(--valid);
 }
 
-.hidden {
-  display: none;
-}
+

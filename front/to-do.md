@@ -3,14 +3,13 @@ x font
 x colors 
 x header and footer
 
-implement classes so I can use a ref to focus the next input
+x implement classes so I can use a ref to focus the next input
 
 validation indicators
   crossout, arrow, check
   email
   pw
   username
-
 
 width change
   give inputs min width equal to media query (use variable?)

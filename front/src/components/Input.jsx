@@ -11,8 +11,7 @@ class Input extends Component {
   }
 
   render() {
-    //required props: type, name (htmlFor, id) placeholder, pattern, minlength, handleChange, value, button's onClick
-    const {
+    const { 
       type, 
       name, 
       instructions,
@@ -21,7 +20,8 @@ class Input extends Component {
       minLength,
       value,
       handleChange,
-      handleClick
+      handleClick,
+      handleFocus
     } = this.props;
 
     return (
@@ -38,6 +38,7 @@ class Input extends Component {
           pattern={pattern}
           minLength={minLength}
           onChange={handleChange}
+          onFocus={handleFocus}
           value={value}
           ref={this.input}
           required

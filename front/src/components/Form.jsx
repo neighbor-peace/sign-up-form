@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import Input from "./Input";
 
 const Form = () => {
-  const[formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     email: {
       value: "",
       valid: false,
@@ -29,21 +29,29 @@ const Form = () => {
     },
   })
 
+  const [focus, setFocus] = useState("email")
+
   function updateForm(event) {
     //updates value and valid
     const {type, name, value, checked} = event.target;
+    const validity = event.target.checkValidity();
+
     setFormData(prevFormData => {
       return {
         ...prevFormData,
         [name]: {
           ...prevFormData[name],
           value: type === 'checkbox' ? checked : value,
-          valid: event.target.checkValidity()
+          valid: validity
         },
       }
     })
   }
 
+  function updateFocus(event) {
+    console.log('focus is now on', event.target.name)
+    setFocus(event.target.name);
+  }
 
   function renderNextElement(event) {
     //changes focus
@@ -54,6 +62,8 @@ const Form = () => {
     //executes iff input is valid
     if (!formData[name].valid) {
       console.log(`${name} is invalid`);
+      console.log(event.target);
+      event.target.previousSibling.focus();
       return;
     }
     
@@ -71,13 +81,12 @@ const Form = () => {
   function submitForm() {
     window.alert(`
       Form Data "Submitted"
+      
       email: ${formData.email.value}
       password: ${formData.password.value}
       username: ${formData.username.value}
       newsletter: ${formData.newsletter.value}`);
   }
-
-  console.log(formData)
 
   return (
     <div className="content-container">
@@ -90,11 +99,10 @@ const Form = () => {
             name="email"
             instructions="Enter your email"
             placeholder="example@email.com"
-            pattern={false}
-            minLength="0"
             value={formData.email.value}
             handleChange={updateForm}
             handleClick={renderNextElement}
+            handleFocus={updateFocus}
           />
          
           {formData.password.shouldRender && 
@@ -102,13 +110,12 @@ const Form = () => {
             type="password"
             name="password"
             instructions="Create a password"
-            placeholder=""
             //pattern: (UpperCase, LowerCase, Number/SpecialChar and min 8 Chars)
             pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-            minLength="0"
             value={formData.password.value}
             handleChange={updateForm}
             handleClick={renderNextElement}
+            handleFocus={updateFocus}
           />}
           
           {formData.username.shouldRender && 
@@ -116,12 +123,11 @@ const Form = () => {
             type="text"
             name="username"
             instructions="Enter a username"
-            placeholder=""
-            pattern={false}
             minLength="5"
             value={formData.username.value}
             handleChange={updateForm}
             handleClick={renderNextElement}
+            handleFocus={updateFocus}
           />}
 
           {formData.newsletter.shouldRender && 
@@ -132,6 +138,7 @@ const Form = () => {
               name="newsletter"
               onChange={updateForm}
               checked={formData.newsletter.value} 
+              onFocus={updateFocus}
             />
             <label htmlFor="newsletter">Send me the newsletter</label>
             <br/>
@@ -146,15 +153,19 @@ const Form = () => {
       </div>
       <div className="hint-container">
         {/* Shown when active, email isn't valid, and user has input sth*/}
+        {focus === "email" && !formData.email.valid && formData.email.value.length > 0 &&
         <div id="email-err" className="hint">Email is invalid or already taken</div>
+        }
         {/* Shown when input is active */}
-        <div>
-          <meter className="pw-strength hint"></meter>
-          <div className="pw-strength hint">Password is too short</div>
-          <div id="pw-hint" className="hint">Make sure it's at least 15 characters OR at least 8 characters including a number and a lowercase letter.</div>
+        {focus === "password" && !formData.password.valid && formData.password.value.length > 0 &&
+        <div className="hint">
+          <div id="pw-hint">Make sure your password is at least 8 characters long and contains uppercase letters, lowercase letters, and numbers or symbols</div>
         </div>
+        }
         {/* Shown when input is active */}
-        <div id="username-status" className="hint">... is available</div>
+        {focus === "username" && !formData.username.valid && formData.username.value.length > 0 &&
+        <div id="username-status" className="hint">{formData.username.value} is unavailable</div>
+        }
       </div>
     </div>
   )
