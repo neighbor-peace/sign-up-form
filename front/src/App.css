@@ -28,6 +28,13 @@ main {
     background-color: black;
     background-image:none;
   }
+  button {
+    width: 100%;
+    margin-top: 24px;
+  }
+  input:not([type="checkbox"]) {
+    width: 100%;
+  }
 }
 
 .header,
