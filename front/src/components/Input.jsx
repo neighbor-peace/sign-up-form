@@ -66,7 +66,6 @@ class Input extends Component {
           type="button"
           name={name}
           onClick={handleClick}
-          // className={isValid ? "valid" : "invalid"}
           className={buttonClass}
           >Continue
         </button>

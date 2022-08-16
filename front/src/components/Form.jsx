@@ -56,19 +56,18 @@ const Form = () => {
     setFocus(event.type === "focus" ? event.target.name : undefined);
   }
 
-  function renderNextElement(event) {
+  function proceed(event) {
     //changes focus
     //updates shouldRender
     const {name, value} = event.target;
     const reveal = formData[name].reveal;
-    const i = formData[name].passFocusTo;
+    const formIndex = formData[name].passFocusTo;
 
     //executes iff input is valid
     if (!formData[name].valid) {
       event.target.previousSibling.focus();
-      return;
     }
-    if (!formData[reveal].shouldRender) {
+    else if (!formData[reveal].shouldRender) {
       setFormData(prevFormData => {
         return {
           ...prevFormData,
@@ -79,7 +78,7 @@ const Form = () => {
         }
       })
     } else {
-      event.target.form[i].focus();
+      event.target.form[formIndex].focus();
     }
   }
 
@@ -100,7 +99,7 @@ const Form = () => {
       <div className="form-container">
         <form  noValidate onSubmit={submitForm}>
           <h3>Welcome to this fictional service!<br/>Your journey starts here</h3>
-          
+
           <Input 
             type="email"
             name="email"
@@ -108,7 +107,7 @@ const Form = () => {
             placeholder="example@email.com"
             value={formData.email.value}
             handleChange={updateForm}
-            handleClick={renderNextElement}
+            handleClick={proceed}
             handleFocus={updateFocus}
             handleBlur={updateFocus}
             isValid={formData.email.valid}
@@ -124,7 +123,7 @@ const Form = () => {
             pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
             value={formData.password.value}
             handleChange={updateForm}
-            handleClick={renderNextElement}
+            handleClick={proceed}
             handleFocus={updateFocus}
             handleBlur={updateFocus}
             isValid={formData.password.valid}
@@ -139,7 +138,7 @@ const Form = () => {
             minLength="5"
             value={formData.username.value}
             handleChange={updateForm}
-            handleClick={renderNextElement}
+            handleClick={proceed}
             handleFocus={updateFocus}
             handleBlur={updateFocus}
             isValid={formData.username.valid}
@@ -157,6 +156,7 @@ const Form = () => {
           />
           }
           <br/>
+          {formData.email.shouldRender && formData.password.shouldRender && formData.username.shouldRender && formData.newsletter.shouldRender &&
           <button 
             id="submit"
             type="button"
@@ -167,7 +167,10 @@ const Form = () => {
               && formData.username.valid ? "valid" : "invalid"}
           >Create account
           </button>
+          }
           
+          {/* Hidden input to prevent enter key from submitting */}
+          <input type="text" style={{display: "none"}} />
         </form>
       </div>
       <div className="hint-container">
