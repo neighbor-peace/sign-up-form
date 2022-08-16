@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import Input from "./Input";
+import CheckboxInput from "./CheckboxInput";
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -139,28 +140,27 @@ const Form = () => {
           />}
 
           {formData.newsletter.shouldRender && 
-          <div className="input-container">
-            <input 
-              type="checkbox" 
-              id="newsletter" 
-              name="newsletter"
-              onChange={updateForm}
-              checked={formData.newsletter.value} 
-              onFocus={updateFocus}
-            />
-            <label htmlFor="newsletter">Send me the newsletter</label>
-            <br/>
-            <button 
-              id="submit"
-              type="button"
-              onClick={submitForm}
-              className={
-                formData.email.valid 
-                && formData.password.valid 
-                && formData.username.valid ? "valid" : "invalid"}
-            >Create account
-            </button>
-          </div>}
+          <CheckboxInput 
+            name="newsletter"
+            instructions="Send me the newsletter"
+            handleChange={updateForm}
+            value={formData.newsletter.value}
+            handleFocus={updateFocus}
+            handleClick={submitForm}
+          />
+          }
+          <br/>
+          <button 
+            id="submit"
+            type="button"
+            onClick={submitForm}
+            className={
+              formData.email.valid 
+              && formData.password.valid 
+              && formData.username.valid ? "valid" : "invalid"}
+          >Create account
+          </button>
+          
         </form>
       </div>
       <div className="hint-container">
